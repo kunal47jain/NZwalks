@@ -21,7 +21,7 @@ namespace NZwalks.Controllers
                     Lat = 1.333,
                     Long = 2.554,
                     Population = 764647
-                    
+
                 };
                 new Regions()
                 {
