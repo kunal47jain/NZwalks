@@ -1,16 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NZwalks.Model.Domains;
+using NZwalks.Repositries;
 
 namespace NZwalks.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class RegionsController : Controller
+       
+
     {
-        [HttpGet]
-        public IActionResult GetAllRegions()
+        private readonly IRegionRepositries regionRepositries;
+
+        public RegionsController(IRegionRepositries regionRepositries)
         {
-            var regions = new List<Regions>();
+            this.regionRepositries = regionRepositries;
+        }
+        [HttpGet]
+        public IActionResult GetAllRegions(object? regions)
+        {
+            var value = new List<Regions>();
             {
                 new Regions()
                 {
@@ -23,6 +32,7 @@ namespace NZwalks.Controllers
                     Population = 764647
 
                 };
+
                 new Regions()
                 {
                     Id = Guid.NewGuid(),
@@ -34,8 +44,11 @@ namespace NZwalks.Controllers
                     Population = 4647
 
                 };
-                
-            }
+
+
+             };  
+        
+            
             return Ok(regions);
         }
 

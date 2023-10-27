@@ -1,21 +1,17 @@
+using Crudoperation.Model;
 using Microsoft.EntityFrameworkCore;
-using NZwalks.Data;
-using NZwalks.Repositries;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddDbContext<Brandcontext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("BrandCS")));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//Adding Dbcontext to services;
-builder.Services.AddDbContext<NZwalksDbcontext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("NZwalks"));
-});
-builder.Services.AddScoped<IRegionRepositries, RegionRepositries>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
